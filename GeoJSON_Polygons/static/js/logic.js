@@ -24,27 +24,35 @@ let baseMaps = {
 
   // Create the map object with center, zoom level and default layer.
   let map = L.map('mapid', {
-      center: [30, 30],
-      zoom: 2,
+      center: [39.5, -98.5],
+      zoom: 3,
       layers: [satelliteStreets]
   });
 
   // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
+let myStyle = {
+  weight: 1,
+  fillColor: 'yellow',
+  color: 'purple',
+  fillOpacity: .1
+
+}
 
 // Accessing the airport GeoJSON URL
-let sixHoods = 'https://raw.githubusercontent.com/MaxDorris/Mapping_Earthquakes/main/majorAirports.json';
+let sixHoods = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
 
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
+d3.json(sixHoods).then(function(data) {
     console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
   L.geoJSON(data, {
     // We turn each feature into a marker on the map.
     onEachFeature: function(feature, layer) {
       console.log(layer);
-      layer.bindPopup('<h2>Airport Code: ' + feature.properties.faa + '</h2><hr><h3>Airport Name: ' + feature.properties.name + '</h3>');
-    }
+      layer.bindPopup('<h3>Area (ID):  ' + feature.properties.AREA_NAME + '</h3>');
+    },
+    style: myStyle
   }).addTo(map);
 });
