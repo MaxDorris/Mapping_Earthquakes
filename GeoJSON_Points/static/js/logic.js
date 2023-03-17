@@ -45,21 +45,24 @@ let map = L.map('mapid').setView([37.5, -122.5], 10);
 // Then we add our 'graymap' tile layer to the map.
 layer.addTo(map);
 
-// // Grabbing our GeoJSON data.
+// Grabbing our GeoJSON data.
 // L.geoJSON(sanFranAirport, {
 //   // We turn each feature into a marker on the map.
 //   pointToLayer: function(feature, latlng) {
 //     console.log(feature);
 //     console.log(latlng);
 //     return L.marker(latlng)
-//     .bindPopup("<h2>" + feature.properties.city + "</h2>");
+//     .bindPopup("<h2>" + feature.properties.name + "</h2><hr><h3>" + feature.properties.city + ', ' + feature.properties.country + "</h3>");
 //   }
 
 // }).addTo(map);
 
+// Grabbing our GeoJSON data.
 L.geoJSON(sanFranAirport, {
-  onEachFeature: function(feature, layer) {
-    console.log(layer);
-    layer.bindPopup();
-   }
-}).addTo(map);
+    // We turn each feature into a marker on the map.
+    onEachFeature: function(feature, layer) {
+      console.log(layer);
+      layer.bindPopup();
+    }
+  }).addTo(map);
+  
