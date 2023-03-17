@@ -34,17 +34,29 @@ L.control.layers(baseMaps).addTo(map);
 
 
 // Accessing the airport GeoJSON URL
-let airportData = 'https://raw.githubusercontent.com/MaxDorris/Mapping_Earthquakes/main/majorAirports.json';
+let torontoData = 'https://raw.githubusercontent.com/MaxDorris/Mapping_Earthquakes/main/torontoRoutes.json'
 
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
+d3.json(torontoData).then(function(data) {
     console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
   L.geoJSON(data, {
     // We turn each feature into a marker on the map.
     onEachFeature: function(feature, layer) {
       console.log(layer);
-      layer.bindPopup('<h2>Airport Code: ' + feature.properties.faa + '</h2><hr><h3>Airport Name: ' + feature.properties.name + '</h3>');
+      layer.bindPopup('<h3>From: ' + feature.properties.src + '</h3><hr><h3>To: ' + feature.properties.dst + '</h3>');
+    },
+    style: function(){
+        return { color: 'aquamarine',
+                 weight: 1
+
     }
+      }
   }).addTo(map);
 });
+
+// alt styling
+// let myStyle = {
+//     color: "#ffffa1",
+//     weight: 2
+// }                     ------------> place this block before d3.json(), then replace style: function with style: myStyle
