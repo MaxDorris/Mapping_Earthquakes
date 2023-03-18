@@ -45,7 +45,7 @@ L.control.layers(baseMaps, overlays).addTo(map);
 let myStyle = {
   color: "#ffffa1",
   weight: 2
-  }
+  };
 // Accessing the airport GeoJSON URL
 let quakes = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson';
 
